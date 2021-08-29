@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    health:
+        image: praqma/network-multitool:extra
+        ports:
+            - 8901:8901
+        environment:
+            # Socat health port
+            HEALTH_PORT: 8901
+            #Remote ports list 
+            SSH_KEEPALIVE: 30
+            SSH_ARGS: -R 8901:localhost:8901  -i /usr/ssh/ssh.pem user@ssh.domain.com
+        command: /usr/scripts/docker-init.sh
+        entrypoint: /bin/bash
+        volumes:
+            - ./scripts:/usr/scripts
+            - ./ssh:/usr/ssh
+            - ./html/index.html:/usr/share/nginx/html/index.html
