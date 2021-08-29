@@ -2,6 +2,7 @@ version: '3'
 
 services:
     health:
+        restart: always
         image: praqma/network-multitool:extra
         ports:
             - 8901:8901
